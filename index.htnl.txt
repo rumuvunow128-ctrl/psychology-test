@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>心理测试小游戏</title>
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+.container {
+    margin-top: 80px;
+}
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #3b82f6;
+    color: white;
+    width: 200px;
+}
+button:hover {
+    background: #2563eb;
+}
+#result {
+    margin-top: 30px;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🧠 心理测试小游戏</h1>
+    <h2 id="question">你更喜欢哪种周末方式？</h2>
+
+    <button onclick="next(1)">A. 独自休息</button>
+    <button onclick="next(2)">B. 和朋友出去玩</button>
+    <button onclick="next(3)">C. 学习或做项目</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+let score = 0;
+let step = 0;
+
+function next(value){
+    score += value;
+    step++;
+
+    if(step === 1){
+        document.getElementById("question").innerText = "遇到压力时你会？";
+        document.querySelectorAll("button")[0].innerText = "A. 自己消化";
+        document.querySelectorAll("button")[1].innerText = "B. 找人倾诉";
+        document.querySelectorAll("button")[2].innerText = "C. 转移注意力";
+    }
+
+    else if(step === 2){
+        document.getElementById("question").innerText = "你的社交状态是？";
+        document.querySelectorAll("button")[0].innerText = "A. 喜欢安静";
+        document.querySelectorAll("button")[1].innerText = "B. 适度社交";
+        document.querySelectorAll("button")[2].innerText = "C. 社交达人";
+    }
+
+    else {
+        showResult();
+    }
+}
+
+function showResult(){
+    let result = "";
+
+    if(score <= 4){
+        result = "🟦 结果：内向安静型｜你更偏向独处恢复能量";
+    } else if(score <= 7){
+        result = "🟩 结果：平衡型｜你社交和独处都能适应";
+    } else {
+        result = "🟥 结果：外向活跃型｜你从社交中获得能量";
+    }
+
+    document.getElementById("result").innerHTML = result;
+    document.getElementById("question").innerText = "测试完成！";
+    document.querySelectorAll("button").forEach(b => b.style.display = "none");
+}
+</script>
+
+</body>
+</html>
